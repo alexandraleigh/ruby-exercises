@@ -1,13 +1,15 @@
 #When doing this exercise, use methods when appropriate to keep things organized.
+require 'set'
 
 snowy = File.read 'the-man-from-snowy-river.txt'
 clancy = File.read 'clancy-of-the-overflow.txt'
 words = File.read '/usr/share/dict/words'
-snowy_words = snowy.split /\W+/
-clancy_words = clancy.split /\W+/
+snowy_words = snowy.downcase.split(/\W+/)
+clancy_words = clancy.downcase.split(/\W+/)
 
 #A set is a data structure that can have things added and removed, and you can ask if things are in it. You can make one from an array
 dictionary = Set.new File.read('/usr/share/dict/words').lines.map{|w| w.chomp}
+
 
 
 #We can treat arrays as sets, and use + for union, - for difference
@@ -22,7 +24,7 @@ puts (clancy_words - snowy_words).uniq.join ', '
 
 puts
 puts "The longest word in snowy is"
-puts "…"
+puts snowy_words.sort_by{|line| line.length}.last
 
 #Here, find the words that are in Snowy but not in the dictionary
 puts
